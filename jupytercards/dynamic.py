@@ -102,6 +102,34 @@ def display_flashcards(ref, keyControl=True, grabFocus=False,
     f = importlib.resources.files(package).joinpath('styles.css')
     css = f.read_bytes()
     styles += css.decode("utf-8")
+    styles += """
+/* Apparence pour les admonitions de type 'code' */
+.admonition[data-type="code"] {
+    background-color: #f7f7f7;
+    border-left: 4px solid #999;
+    font-family: monospace;
+    color: #2c2c2c;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.admonition[data-type="code"] .admonition-title {
+    font-weight: bold;
+    font-size: 0.95em;
+    color: #000 !important;
+    margin-bottom: 6px;
+}
+
+.admonition[data-type="code"] pre {
+    background: #eee;
+    padding: 8px;
+    border-radius: 3px;
+    overflow-x: auto;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+"""
     styles += "\n</style>"
 
     # Load JavaScript files
