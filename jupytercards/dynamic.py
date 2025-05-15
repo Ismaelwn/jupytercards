@@ -6,6 +6,10 @@ import urllib.request
 #import pkg_resources
 import importlib.resources
 import sys
+#from .JcThread import JcThread
+
+
+
 
 
 def display_flashcards(ref, keyControl=True, grabFocus=False,
@@ -47,7 +51,7 @@ def display_flashcards(ref, keyControl=True, grabFocus=False,
     John  M. Shea
     2021-2025
     '''
-
+   
     # Specify default front colors
     front_color_dict = [
         'var(--asparagus)',
@@ -102,34 +106,45 @@ def display_flashcards(ref, keyControl=True, grabFocus=False,
     f = importlib.resources.files(package).joinpath('styles.css')
     css = f.read_bytes()
     styles += css.decode("utf-8")
+
     styles += """
-/* Apparence pour les admonitions de type 'code' */
-.admonition[data-type="code"] {
-    background-color: #f7f7f7;
-    border-left: 4px solid #999;
-    font-family: monospace;
-    color: #2c2c2c;
-    padding: 10px;
-    border-radius: 4px;
-    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.05);
+/* Ultra-compactage de la face arrière */
+.back .flashcardtext {
+    font-size: clamp(0.4em, 0.75vw, 0.7em);  /* Taille minimale poussée à 0.4em */
+    line-height: 1em;                       /* Interligne très réduit */
+    white-space: normal;
+    text-align: left;
+    padding: 4px;                           /* Moins d'espace autour */
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+/* Forcer la couleur du titre des admonitions à noir */
+.admonition-title {
+    color: black !important;
+}
+/* Forcer la couleur du texte dans les admonitions */
+.admonition {
+    color: black !important;
 }
 
-.admonition[data-type="code"] .admonition-title {
-    font-weight: bold;
-    font-size: 0.95em;
-    color: #000 !important;
-    margin-bottom: 6px;
+/* S’assurer que le texte dans les blocs est noir aussi */
+.admonition .admonition-title,
+.admonition p,
+.admonition pre,
+.admonition code {
+    color: black !important;
 }
 
-.admonition[data-type="code"] pre {
-    background: #eee;
-    padding: 8px;
-    border-radius: 3px;
-    overflow-x: auto;
-    font-family: monospace;
-    font-size: 0.9em;
-}
+
+
 """
+
     styles += "\n</style>"
 
     # Load JavaScript files
@@ -208,7 +223,9 @@ def display_flashcards(ref, keyControl=True, grabFocus=False,
             all_cards = json.loads(json_data)
         else:
             #print("File detected")
-            with open(ref) as file:
+            #with open(ref) as file:
+            with open(ref, encoding="utf-8") as file:
+
                 for line in file:
                     json_data += line
             static = True
@@ -412,4 +429,17 @@ def md2json(md, savefile = False):
       json.dump(cards, f)
 
   return json.dumps(cards, indent=4)
-
+'''
+def display_threaded(ref, keyControl=True, grabFocus=False,
+                       shuffle_cards=False,
+                       front_colors=None,
+                       back_colors=None,
+                       text_colors=None,
+                       title='',
+                       subject='',
+                       topics=None):
+    
+    d_thread = JcThread(display_flashcards, ref)
+    
+    d_thread.start()
+'''
