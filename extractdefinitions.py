@@ -9,7 +9,7 @@ def extract_defns(directory, chapter):
     defns=[]
     chdefns=[]
     fileroot=""
-    flashcards=directory+'/flashcards/'
+    flashcards= os.path.join(directory,'flashcards')
     print(flashcards)
 
 
@@ -17,8 +17,10 @@ def extract_defns(directory, chapter):
     for filename in os.listdir(directory):
         if filename.endswith(".ipynb"):
 
-                
-            with open(directory + "/" + filename,'r') as file:
+            temp = os.path.join(directory, filename)
+           
+            print(temp)
+            with open(temp,'r') as file:
                
                 if len(defns)>0:
                     print(fileroot, len(defns))
@@ -27,7 +29,8 @@ def extract_defns(directory, chapter):
                     #return defns
                     if not os.path.isdir(flashcards):
                         os.makedirs(flashcards)
-                    outfile=flashcards+fileroot+'.json'
+                    outfile= os.path.join(flashcards,fileroot+'.json')
+                    
                     print(outfile)
                     with open(outfile,'w') as out:
                         json.dump(defns,out,indent=4)
@@ -47,14 +50,14 @@ def extract_defns(directory, chapter):
 
 
                             term=term.strip()
-                            term=term.replace("\\n","")
+                            term=term.replace("\n","")
                             #print(term)
                         if defn_start==5:
                             defn=line.replace('",','')
                             defn=defn.replace('"','')
                             defn=defn.replace(':','')
                             defn=defn.strip()
-                            defn=defn.replace("\\n","")
+                            defn=defn.replace("\n","")
                             defns+=[{"front":term, "back":defn}]
                             chdefns+=[{"front":term, "back":defn}]
                             
