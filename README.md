@@ -1,5 +1,11 @@
 
 # JupyterCards
+
+
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11+-blue?logo=python)](https://www.python.org/) 
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+
 *JupyterCards* is a tool for displaying **interactive flash cards in Jupyter notebooks and Jupyter Book**. JupyterCards was created to enable interactive quizzes for readers of my book [*Foundations of Data Science with Python*](https://amzn.to/48cYila)<sup>1</sup>
 
 I have collected all of those flashcards into a single set here: [Data Science Flashcards](https://jmshea.github.io/data-science-flashcards/). Or you can see them in the individual sections on the website for the book at [*Foundations of Data Science with Python* &mdash; Online Resources](https://www.fdsp.net).
