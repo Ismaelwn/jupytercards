@@ -3,13 +3,12 @@ import string
 import random
 import json
 import urllib.request
-#import pkg_resources
 import importlib.resources
 import sys
 from jupytercards import feedback
 import ipywidgets as widgets
 from IPython.display import display
-#from .JcThread import JcThread
+
 
 
 
@@ -32,7 +31,7 @@ def display_flashcards(ref, keyControl=True, grabFocus=False,
                        title,
                        subject,
                        topics)
-        print("1")
+        #print("1")
 
     else:
         display_flashcards_aux(ref, keyControl, grabFocus,
@@ -43,7 +42,7 @@ def display_flashcards(ref, keyControl=True, grabFocus=False,
                        title,
                        subject,
                        topics)
-        print("2")
+        #print("2")
 
 
 def display_flashcards_aux(ref, keyControl=True, grabFocus=False,
