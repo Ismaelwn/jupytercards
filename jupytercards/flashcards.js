@@ -41,7 +41,17 @@ function jaxify(string) {
 window.flipCard = function flipCard(ths) {
     //console.log(ths);
     //console.log(ths.id);
-    ths.classList.toggle("flip"); 
+    ths.classList.toggle("flip"); //pour capter l'évenement de flip
+    ths.dispatchEvent(new CustomEvent("cardFlipped", {
+    bubbles: true,
+    detail: {
+        id: ths.id,
+        flipped: ths.classList.contains("flip"),
+        time: Date.now()
+        // potentiellement le numéro de la cellule
+    }
+}));
+
     ths.focus();
     var next=document.getElementById(ths.id+'-next');
     next.style.pointerEvents='none';

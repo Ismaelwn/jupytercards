@@ -6,9 +6,7 @@ import urllib.request
 #import pkg_resources
 import importlib.resources
 import sys
-from jupytercards import feedback
-import ipywidgets as widgets
-from IPython.display import display
+
 #from .JcThread import JcThread
 
 
@@ -16,37 +14,6 @@ from IPython.display import display
 
 
 def display_flashcards(ref, keyControl=True, grabFocus=False,
-                       shuffle_cards=False,
-                       front_colors=None,
-                       back_colors=None,
-                       text_colors=None,
-                       title='',
-                       subject='',
-                       topics=None, Feedback=False):
-    if Feedback :
-        feedback.display_card_with_contextual_feedback(ref, keyControl, grabFocus,
-                       shuffle_cards,
-                       front_colors,
-                       back_colors,
-                       text_colors,
-                       title,
-                       subject,
-                       topics)
-        print("1")
-
-    else:
-        display_flashcards_aux(ref, keyControl, grabFocus,
-                       shuffle_cards,
-                       front_colors,
-                       back_colors,
-                       text_colors,
-                       title,
-                       subject,
-                       topics)
-        print("2")
-
-
-def display_flashcards_aux(ref, keyControl=True, grabFocus=False,
                        shuffle_cards=False,
                        front_colors=None,
                        back_colors=None,
@@ -334,11 +301,14 @@ def display_flashcards_aux(ref, keyControl=True, grabFocus=False,
         '''
         #loadData+=url+script_end
 
-
+    
     # Display the content in the notebook
     display(HTML(styles))
     display(HTML(spacer+mydiv+spacer+nextbutton+spacer))
     display(Javascript(script+loadData))
+    if feedback :
+        feedback.display_card_with_contextual_feedback(data)
+        
 
 
 # Functions to help make flashcard JSON files
@@ -465,4 +435,7 @@ def md2json(md, savefile = False):
   return json.dumps(cards, indent=4)
 
 
+def display_flashcards(ref, feedback) :
+    feedback.display_card_with_separated_feedback(ref)
+    
     
