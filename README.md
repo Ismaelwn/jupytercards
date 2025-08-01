@@ -29,7 +29,9 @@ As of version 1.7, JupyterCards supports switching cards by swiping left on touc
 it may not always load MathJax if you do not have any LaTeX on your page. To resolve this, 
 you can include the invisible math command `$\,\!$` in any Markdown cell. I hope to remove
 this requirement in the future.
-
+## Bonus extension recently added
+If you are installing this librairy from this tree deposit, you will be able to add feedback to your flashcards on a pre/post evaluation system.
+An example is available in the provided notebook.
 
 ## Installation 
 
